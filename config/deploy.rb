@@ -1,5 +1,5 @@
 # Require the necessary Capistrano recipes
-require 'capistrano-rbenv'
+require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'sidekiq/capistrano'
 

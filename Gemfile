@@ -203,4 +203,5 @@ group :profile do
   # gem 'rack-perftools_profiler', require: 'rack/perftools_profiler', platform: :mri_19
 end
 
-gem 'capistrano', require: nil
+gem 'capistrano', '2.15.5', require: nil
+gem 'rvm-capistrano'
