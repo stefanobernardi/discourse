@@ -1,5 +1,5 @@
 required:
-  title: 'Italian Startup Scene'
+  title:
     client: true
     default: 'Discourse'
   site_description: 'Startups and Venture Capital disucssions'
