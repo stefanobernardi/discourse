@@ -1,11 +1,11 @@
 required:
-  title:
+  title: 'Italian Startup Scene'
     client: true
     default: 'Discourse'
-  site_description: ''
-  contact_email: ''
-  notification_email: 'info@discourse.org'
-  site_contact_username: ''
+  site_description: 'Startups and Venture Capital disucssions'
+  contact_email: 'ste@bernardi.me'
+  notification_email: 'ste@bernardi.me'
+  site_contact_username: 'stefanobernardi'
   logo_url:
     client: true
     default: '/images/d-logo-sketch.png'
@@ -16,9 +16,9 @@ required:
     client: true
     default: '/images/default-favicon.ico'
   apple_touch_icon_url: '/images/default-apple-touch-icon.png'
-  company_full_name: 'My Unconfigured Forum Ltd.'
-  company_short_name: 'Unconfigured Forum'
-  company_domain: 'www.example.com'
+  company_full_name: 'ISS'
+  company_short_name: 'ISS'
+  company_domain: 'www.startupscene.org'
 
 basic:
   default_locale:
