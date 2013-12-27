@@ -93,6 +93,3 @@ config/version.rb
 bundler_stubs/*
 
 vendor/bundle/*
-
-config/settings.yml
-config/initializers/secret_token.rb

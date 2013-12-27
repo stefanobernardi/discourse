@@ -65,6 +65,7 @@ namespace :deploy do
 
   # Symlinks all of your uploaded configuration files to where they should be.
   task :symlink_config, roles: :app do
+    run  "ln -nfs #{shared_path}/config/discourse.conf #{release_path}/config/discourse.conf"
     run  "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run  "ln -nfs #{shared_path}/config/newrelic.yml #{release_path}/config/newrelic.yml"
     run  "ln -nfs #{shared_path}/config/redis.yml #{release_path}/config/redis.yml"
