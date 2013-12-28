@@ -6,7 +6,7 @@ port: 3000
 timeout: 30
 log: /home/discourse/discourse/shared/log/thin.log
 pid: /home/discourse/discourse/shared/pids/thin.pid
-socket: /home/discourse/discourse/tmp/thin.sock
+socket: /home/discourse/discourse/shared/sockets/thin.sock
 max_conns: 1024
 max_persistent_conns: 100
 require: []
