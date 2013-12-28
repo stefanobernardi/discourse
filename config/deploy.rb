@@ -60,6 +60,7 @@ namespace :deploy do
     put  File.read("config/environments/production.rb"), "#{shared_path}/config/environments/production.rb"
     put  File.read("config/initializers/secret_token.rb"), "#{shared_path}/config/initializers/secret_token.rb"
     sudo "ln -nfs #{release_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    run  "ln -nfs #{release_path}/config/nginx.conf /etc/nginx/conf.d/discourse.conf"
     puts "Now edit the config files in #{shared_path}."
   end
 
