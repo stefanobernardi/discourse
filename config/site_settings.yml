@@ -2,10 +2,10 @@ required:
   title:
     client: true
     default: 'Discourse'
-  site_description: 'Startups and Venture Capital disucssions'
+  site_description: 'Startups and Venture Capital in Italy'
   contact_email: 'ste@bernardi.me'
   notification_email: 'ste@bernardi.me'
-  site_contact_username: 'stefanobernardi'
+  site_contact_username: 'stefano'
   logo_url:
     client: true
     default: '/images/d-logo-sketch.png'
