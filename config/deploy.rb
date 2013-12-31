@@ -55,7 +55,6 @@ namespace :deploy do
     run  "mkdir -p #{shared_path}/config/initializers"
     run  "mkdir -p #{shared_path}/config/environments"
     run  "mkdir -p #{shared_path}/sockets"
-    put  File.read("config/discourse.conf"), "#{shared_path}/config/discourse.conf"
     put  File.read("config/database.yml"), "#{shared_path}/config/database.yml"
     put  File.read("config/redis.yml"), "#{shared_path}/config/redis.yml"
     put  File.read("config/environments/production.rb"), "#{shared_path}/config/environments/production.rb"
