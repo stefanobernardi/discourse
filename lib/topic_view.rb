@@ -100,7 +100,7 @@ class TopicView
 
   def image_url
     return nil if desired_post.blank?
-    desired_post.user.try(:large_avatar_url)
+    desired_post.user.try(:small_avatar_url)
   end
 
   def filter_posts(opts = {})

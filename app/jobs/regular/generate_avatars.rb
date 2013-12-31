@@ -28,7 +28,7 @@ module Jobs
       image = ImageSorcery.new(source)
       extension = File.extname(original_path)
 
-      [200, 120, 45, 32, 25, 20].each do |s|
+      [120, 45, 32, 25, 20].each do |s|
         # handle retina too
         [s, s * 2].each do |size|
           begin

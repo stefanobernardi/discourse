@@ -106,3 +106,4 @@ Bluepill.application("discourse", :base_dir => ENV["HOME"] + '/.bluepill') do |a
   end
 
 end
+

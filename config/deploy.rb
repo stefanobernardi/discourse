@@ -55,11 +55,13 @@ namespace :deploy do
     run  "mkdir -p #{shared_path}/config/initializers"
     run  "mkdir -p #{shared_path}/config/environments"
     run  "mkdir -p #{shared_path}/sockets"
+    put  File.read("config/discourse.conf"), "#{shared_path}/config/discourse.conf"
     put  File.read("config/database.yml"), "#{shared_path}/config/database.yml"
     put  File.read("config/redis.yml"), "#{shared_path}/config/redis.yml"
     put  File.read("config/environments/production.rb"), "#{shared_path}/config/environments/production.rb"
     put  File.read("config/initializers/secret_token.rb"), "#{shared_path}/config/initializers/secret_token.rb"
-    # remember to put nginx.conf in /etc/nginx/conf.d/discourse.conf and /etc/nginx/sites-enabled/discourse
+    sudo "ln -nfs #{release_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    sudo "ln -nfs #{release_path}/config/nginx.conf /etc/nginx/conf.d/discourse.conf"
     puts "Now edit the config files in #{shared_path}."
   end
 
