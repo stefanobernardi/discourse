@@ -93,3 +93,5 @@ config/version.rb
 bundler_stubs/*
 
 vendor/bundle/*
+
+plugins/facebook-groups/plugin.rb
