@@ -75,7 +75,6 @@ namespace :deploy do
     run  "ln -nfs #{shared_path}/config/redis.yml #{release_path}/config/redis.yml"
     run  "ln -nfs #{shared_path}/config/environments/production.rb #{release_path}/config/environments/production.rb"
     run  "ln -nfs #{shared_path}/config/initializers/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
-    run  "ln -nfs #{shared_path}/plugins/facebook-groups/plugin.rb #{release_path}/plugins/facebook-groups/plugin.rb"
   end
 end
 
