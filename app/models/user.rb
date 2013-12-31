@@ -321,7 +321,7 @@ class User < ActiveRecord::Base
 
   def large_avatar_url
     template = avatar_template
-    schemaless template.gsub("{size}", "200")
+    schemaless template.gsub("{size}", "240")
   end
 
   # the avatars might take a while to generate
