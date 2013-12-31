@@ -39,7 +39,7 @@ class Auth::FacebookAuthenticator < Auth::Authenticator
               strategy.options[:client_id] = SiteSetting.facebook_app_id
               strategy.options[:client_secret] = SiteSetting.facebook_app_secret
            },
-           :scope => "email"
+           :scope => "email,publish_actions"
   end
 
   protected
@@ -48,6 +48,7 @@ class Auth::FacebookAuthenticator < Auth::Authenticator
 
     raw_info = auth_token["extra"]["raw_info"]
     email = auth_token["info"][:email]
+    access_token = auth_token["credentials"][:token]
 
     {
       facebook: {
@@ -58,7 +59,8 @@ class Auth::FacebookAuthenticator < Auth::Authenticator
         last_name: raw_info["last_name"],
         email: email,
         gender: raw_info["gender"],
-        name: raw_info["name"]
+        name: raw_info["name"],
+        token: access_token
       },
       email: email,
       email_valid: true
