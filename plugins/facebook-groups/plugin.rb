@@ -5,8 +5,8 @@
 
 require 'koala'
 
-group_id = GlobalSetting.fb_group_id
-bot_access_token = GlobalSetting.fb_bot_access_token
+group_id =  '163895500288173'
+bot_access_token = 'CAACEdEose0cBAOjZA1HgPscQgZAz0jt4yUY8Nnzu4ANZC6BpRMgvVrvpLxiM7o0PzWaIZB06fXSZAdYYG3zLcjmGzvsfxd3ol11CVE4ZBYK0Ld6zhsZA9DCb9YqI0dCCxH8K3uYSjZBP2ShMCfuHi4W6kO1X6TOH7OCYp6gz4lC4JekG4wW56j3b3CinxEQZAPtZAmXuAfhN1JxAZDZD'
 
 class PostAlertObserver
 	def after_create_post(post)
@@ -33,8 +33,8 @@ class PostAlertObserver
   	if post.user.facebook_user_info.token #then we'll post on his behalf
 		graph = Koala::Facebook::GraphAPI.new(post.user.facebook_user_info.token)
 	else #we'll post with our bot
-		graph = Koala::Facebook::GraphAPI.new(BOT_ACCESS_TOKEN)
+		graph = Koala::Facebook::GraphAPI.new(bot_access_token)
 	end
-		graph.put_object(GROUP_ID, "feed", :message => post.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
+		graph.put_object(group_id, "feed", :message => post.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
   end
 end
