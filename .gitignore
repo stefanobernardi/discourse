@@ -34,9 +34,7 @@ config/discourse.conf
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-!/plugins/
-/plugins/*
-!/plugins/facebook-groups
+/plugins
 /tmp
 /logfile
 log/
