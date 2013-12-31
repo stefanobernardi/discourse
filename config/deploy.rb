@@ -54,8 +54,6 @@ namespace :deploy do
   task :setup_config, roles: :app do
     run  "mkdir -p #{shared_path}/config/initializers"
     run  "mkdir -p #{shared_path}/config/environments"
-    run  "mkdir -p #{shared_path}/plugins"
-    run  "mkdir -p #{shared_path}/plugins/facebook-groups"
     run  "mkdir -p #{shared_path}/sockets"
     put  File.read("config/database.yml"), "#{shared_path}/config/database.yml"
     put  File.read("config/redis.yml"), "#{shared_path}/config/redis.yml"

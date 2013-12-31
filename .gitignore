@@ -34,8 +34,8 @@ config/discourse.conf
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/plugins
 /tmp
+/plugins
 /logfile
 log/
 
@@ -93,5 +93,3 @@ config/version.rb
 bundler_stubs/*
 
 vendor/bundle/*
-
-config/import_facebook.yml
