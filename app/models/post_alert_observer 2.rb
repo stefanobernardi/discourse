@@ -101,14 +101,17 @@ end
 
     def post_to_fb_group(topic)
 
+      group_id = ENV['FB_GROUP_ID']
+      bot_access_token = ENV['FB_BOT_TOKEN']
+
       permalink = "http://startupscene.org/t/" + topic.slug
 
       if topic.user.facebook_user_info.token #then we'll post on their behalf
-        @graph = Koala::Facebook::GraphAPI.new(topic.user.facebook_user_info.token)
+        graph = Koala::Facebook::GraphAPI.new(topic.user.facebook_user_info.token)
       else #we'll post with our bot
-        @graph = Koala::Facebook::GraphAPI.new(ENV['FB_BOT_TOKEN'])
+        graph = Koala::Facebook::GraphAPI.new(bot_access_token)
       end
-        @graph.put_object(ENV['FB_GROUP_ID'], "feed", :message => topic.posts.first.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
+        graph.put_object(group_id, "feed", :message => topic.posts.first.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
     end
 
     def callback_for(action, model)
