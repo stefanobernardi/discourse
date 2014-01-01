@@ -109,11 +109,21 @@ class PostAlertObserver < ActiveRecord::Observer
       :description => description
     }
 
-    if topic.user.facebook_user_info.token #then we'll post on their behalf
-      @graph = Koala::Facebook::GraphAPI.new(topic.user.facebook_user_info.token)
-    else #we'll post with our bot
-      @graph = Koala::Facebook::GraphAPI.new('CAACcFH2K1aQBALD8T43N6tvAy26eVrDbOeNCUbWIg6bCWebKEJwPdpqet8X0sYFR1O5JPfzi6hTHsfeWtTIcrSpae9zwyEUd0QVij4BnHdocyMGzEu4FIiNynSHZC4JCyKh8l3WueMeLbjZBzaaNUmLh4vmXxMGckyRAYI4M0uBZCIGZCjSW')
+    fb_bot_token = User.find_by_username('issbot').facebook_user_info.token
+
+    begin #stuff can break, so we'll have to begin/rescue
+      @graph = Koala::Facebook::API.new(User.find_by_username('issbot').facebook_user_info.token)
+      @graph.get_object('me') #just to test wether the token is valid
+    rescue => e
+      # TO-DO:
+      # - if the token is expired, then we should get a new one
+      # - if the token doesn't have permissions, then we should prompt to get them
+      # - if the token doesn't exist, then we should prompt to get one
+
+      # Fallback to the BOT's Token.
+      @graph = Koala::Facebook::API.new('CAACcFH2K1aQBALD8T43N6tvAy26eVrDbOeNCUbWIg6bCWebKEJwPdpqet8X0sYFR1O5JPfzi6hTHsfeWtTIcrSpae9zwyEUd0QVij4BnHdocyMGzEu4FIiNynSHZC4JCyKh8l3WueMeLbjZBzaaNUmLh4vmXxMGckyRAYI4M0uBZCIGZCjSW')
     end
+      #This might break as well?
       @graph.put_object('163895500288173', "feed", options)
   end
 
