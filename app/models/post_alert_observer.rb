@@ -101,8 +101,8 @@ end
 
     def post_to_fb_group(topic)
 
-      group_id = GlobalSetting.fb_group_id
-      bot_access_token = GlobalSetting.fb_bot_access_token
+      group_id = ENV['FB_GROUP_ID']
+      bot_access_token = ENV['FB_BOT_TOKEN']
 
       permalink = "http://startupscene.org/t/" + topic.slug
 
