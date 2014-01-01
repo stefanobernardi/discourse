@@ -1,3 +1,16 @@
+require 'koala'
+
+# THIS FILE HAS BEEN MODIFIED TO POST TO A FACEBOOK GROUP FOR EVERY NEW TOPIC
+# TO-DO:
+#  - Post comments
+#  - Post likes
+#  - Force users to auth with FB
+
+# Methods changed:
+#  - after_create_post
+# Methods added:
+#  - post_to_fb_group
+
 class PostAlertObserver < ActiveRecord::Observer
   observe :post, :post_action, :post_revision
 
@@ -56,19 +69,50 @@ class PostAlertObserver < ActiveRecord::Observer
     create_notification(post.user, Notification.types[:edited], post, display_username: post_revision.user.username)
   end
 
+  # def after_create_post(post)
+  #   if post.topic.private_message?
+  #     # If it's a private message, notify the topic_allowed_users
+  #     post.topic.all_allowed_users.reject{ |a| a.id == post.user_id }.each do |a|
+  #       create_notification(a, Notification.types[:private_message], post)
+  #     end
+  #   elsif post.post_type != Post.types[:moderator_action]
+  #     # If it's not a private message and it's not an automatic post caused by a moderator action, notify the users
+  #     notify_post_users(post)
+  #   end
+  # end
+
+
   def after_create_post(post)
     if post.topic.private_message?
-      # If it's a private message, notify the topic_allowed_users
-      post.topic.all_allowed_users.reject{ |a| a.id == post.user_id }.each do |a|
-        create_notification(a, Notification.types[:private_message], post)
-      end
+        # If it's a private message, notify the topic_allowed_users
+        post.topic.all_allowed_users.reject{ |a| a.id == post.user_id }.each do |a|
+          create_notification(a, Notification.types[:private_message], post)
+        end
     elsif post.post_type != Post.types[:moderator_action]
-      # If it's not a private message and it's not an automatic post caused by a moderator action, notify the users
-      notify_post_users(post)
+        # If it's not a private message and it's not an automatic post caused by a moderator action, notify the users
+        notify_post_users(post)
+        if post.post_number == 1 && post.topic
+          post_to_fb_group(topic)
+        end
     end
-  end
+end
 
   protected
+
+    def post_to_fb_group(topic)
+
+      group_id = GlobalSetting.fb_group_id
+      bot_access_token = GlobalSetting.fb_bot_access_token
+
+      permalink = "http://startupscene.org/t/" + topic.slug
+
+      if post.user.facebook_user_info.token #then we'll post on their behalf
+        graph = Koala::Facebook::GraphAPI.new(post.user.facebook_user_info.token)
+      else #we'll post with our bot
+        graph = Koala::Facebook::GraphAPI.new(bot_access_token)
+      end
+        graph.put_object(group_id, "feed", :message => post.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
+    end
 
     def callback_for(action, model)
       "#{action}_#{model.class.name.underscore.gsub(/.+\//, '')}"
