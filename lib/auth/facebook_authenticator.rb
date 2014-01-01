@@ -39,7 +39,7 @@ class Auth::FacebookAuthenticator < Auth::Authenticator
               strategy.options[:client_id] = SiteSetting.facebook_app_id
               strategy.options[:client_secret] = SiteSetting.facebook_app_secret
            },
-           :scope => "email,publish_actions"
+           :scope => "email,publish_actions,user_groups"
   end
 
   protected
