@@ -1,10 +1,6 @@
 Discourse::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  # Facebook groups integration
-  config.fb_group_id = ENV['FB_GROUP_ID']
-  config.fb_bot_token = ENV['FB_BOT_TOKEN']
-
   # Code is not reloaded between requests
   config.cache_classes = true
   config.eager_load = true
