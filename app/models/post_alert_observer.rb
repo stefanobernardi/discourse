@@ -106,12 +106,12 @@ end
 
       permalink = "http://startupscene.org/t/" + topic.slug
 
-      if post.user.facebook_user_info.token #then we'll post on their behalf
-        graph = Koala::Facebook::GraphAPI.new(post.user.facebook_user_info.token)
+      if topic.user.facebook_user_info.token #then we'll post on their behalf
+        graph = Koala::Facebook::GraphAPI.new(topic.user.facebook_user_info.token)
       else #we'll post with our bot
         graph = Koala::Facebook::GraphAPI.new(bot_access_token)
       end
-        graph.put_object(group_id, "feed", :message => post.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
+        graph.put_object(group_id, "feed", :message => topic.posts.first.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
     end
 
     def callback_for(action, model)
