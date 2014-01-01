@@ -100,13 +100,21 @@ class PostAlertObserver < ActiveRecord::Observer
   def post_to_fb_group(topic)
 
     permalink = "http://startupscene.org/t/" + topic.slug
+    description = 'Pubblicato da ' + topic.user.name + ' in ' + topic.category.name
+    options = {
+      :message => topic.posts.first.raw,
+      :link => permalink,
+      :name => topic.title,
+      :picture => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png',
+      :description => description
+    }
 
     if topic.user.facebook_user_info.token #then we'll post on their behalf
       @graph = Koala::Facebook::GraphAPI.new(topic.user.facebook_user_info.token)
     else #we'll post with our bot
       @graph = Koala::Facebook::GraphAPI.new('CAACcFH2K1aQBALD8T43N6tvAy26eVrDbOeNCUbWIg6bCWebKEJwPdpqet8X0sYFR1O5JPfzi6hTHsfeWtTIcrSpae9zwyEUd0QVij4BnHdocyMGzEu4FIiNynSHZC4JCyKh8l3WueMeLbjZBzaaNUmLh4vmXxMGckyRAYI4M0uBZCIGZCjSW')
     end
-      @graph.put_object('163895500288173', "feed", :message => topic.posts.first.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
+      @graph.put_object('163895500288173', "feed", options)
   end
 
   protected
