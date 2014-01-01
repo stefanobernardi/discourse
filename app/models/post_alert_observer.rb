@@ -95,21 +95,21 @@ class PostAlertObserver < ActiveRecord::Observer
           post_to_fb_group(post.topic)
         end
     end
-end
+  end
+
+  def post_to_fb_group(topic)
+
+    permalink = "http://startupscene.org/t/" + topic.slug
+
+    if topic.user.facebook_user_info.token #then we'll post on their behalf
+      @graph = Koala::Facebook::GraphAPI.new(topic.user.facebook_user_info.token)
+    else #we'll post with our bot
+      @graph = Koala::Facebook::GraphAPI.new(ENV['FB_BOT_TOKEN'])
+    end
+      @graph.put_object(ENV['FB_GROUP_ID'], "feed", :message => topic.posts.first.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
+  end
 
   protected
-
-    def post_to_fb_group(topic)
-
-      permalink = "http://startupscene.org/t/" + topic.slug
-
-      if topic.user.facebook_user_info.token #then we'll post on their behalf
-        @graph = Koala::Facebook::GraphAPI.new(topic.user.facebook_user_info.token)
-      else #we'll post with our bot
-        @graph = Koala::Facebook::GraphAPI.new(ENV['FB_BOT_TOKEN'])
-      end
-        @graph.put_object(ENV['FB_GROUP_ID'], "feed", :message => topic.posts.first.raw, :link => permalink, :image => 'https://s3-eu-west-1.amazonaws.com/italianstartupscene/iss-logo.png')
-    end
 
     def callback_for(action, model)
       "#{action}_#{model.class.name.underscore.gsub(/.+\//, '')}"
