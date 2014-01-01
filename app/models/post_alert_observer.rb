@@ -92,7 +92,7 @@ class PostAlertObserver < ActiveRecord::Observer
         # If it's not a private message and it's not an automatic post caused by a moderator action, notify the users
         notify_post_users(post)
         if post.post_number == 1 && post.topic
-          post_to_fb_group(topic)
+          post_to_fb_group(post.topic)
         end
     end
 end
