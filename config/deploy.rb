@@ -63,7 +63,8 @@ namespace :deploy do
     put  File.read("config/initializers/secret_token.rb"), "#{shared_path}/config/initializers/secret_token.rb"
     sudo "cp #{shared_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "cp #{shared_path}/config/nginx.conf /etc/nginx/conf.d/discourse.conf"
-    puts "Now edit the config files in #{shared_path}."
+    sudo "/etc/init.d/nginx reload"
+    puts "Configs uploaded and NginX reloaded."
   end
 
   # Symlinks all of your uploaded configuration files to where they should be.
