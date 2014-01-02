@@ -99,7 +99,7 @@ class PostAlertObserver < ActiveRecord::Observer
 
   def post_to_fb_group(topic)
 
-    permalink = "http://startupscene.org/t/" + topic.slug
+    permalink = "http://startupscene.it/t/" + topic.slug
     description = 'Pubblicato da ' + topic.user.name + ' in ' + topic.category.name
     options = {
       :message => topic.posts.first.raw,

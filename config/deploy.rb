@@ -20,9 +20,9 @@ set :use_sudo, false
 set :rails_env, :production
 set :rbenv_ruby_version, '2.0.0-p353'
 
-role :app, 'startupscene.org', primary: true
-role :db,  'startupscene.org', primary: true
-role :web, 'startupscene.org', primary: true
+role :app, 'startupscene.it', primary: true
+role :db,  'startupscene.it', primary: true
+role :web, 'startupscene.it', primary: true
 
 # Application Settings
 set :application, 'discourse'
