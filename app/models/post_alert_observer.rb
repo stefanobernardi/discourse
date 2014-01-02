@@ -112,8 +112,9 @@ class PostAlertObserver < ActiveRecord::Observer
     fb_bot_token = User.find_by_username('issbot').facebook_user_info.token
 
     begin #stuff can break, so we'll have to begin/rescue
+      #test wether the token is valid and has access to our group
       @graph = Koala::Facebook::API.new(topic.user.facebook_user_info.token)
-      @graph.get_object('me') #just to test wether the token is valid
+      @graph.get_connections('163895500288173', "feed")
     rescue => e
       # TO-DO:
       # - if the token is expired, then we should get a new one
@@ -123,7 +124,6 @@ class PostAlertObserver < ActiveRecord::Observer
       # Fallback to the BOT's Token.
       @graph = Koala::Facebook::API.new(fb_bot_token)
     end
-      #This might break as well?
       @graph.put_object('163895500288173', "feed", options)
   end
 
