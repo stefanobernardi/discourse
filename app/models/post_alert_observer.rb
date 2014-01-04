@@ -122,8 +122,8 @@ class PostAlertObserver < ActiveRecord::Observer
       # - if the token doesn't exist, then we should prompt to get one
 
       # Fallback to the BOT's Token.
-      @graph = Koala::Facebook::API.new(fb_bot_token)
-      @graph.put_object('163895500288173', "feed", options)
+      @new_graph = Koala::Facebook::API.new(fb_bot_token)
+      @new_graph.put_object('163895500288173', "feed", options)
     end
   end
 
