@@ -25,6 +25,7 @@ public/plugins/*
 
 config/discourse.pill
 config/discourse.conf
+config/twitter.yml
 
 # Ignore the default SQLite database and db dumps
 /db/*.sqlite3
