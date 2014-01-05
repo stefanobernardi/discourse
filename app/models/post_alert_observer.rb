@@ -5,11 +5,14 @@ require 'koala'
 #  - Post comments
 #  - Post likes
 #  - Force users to auth with FB
+#
+# THIS FILE HAS BEEN MODIFIED TO TWEET FOR EVERY NEW TOPIC
 
 # Methods changed:
 #  - after_create_post
 # Methods added:
 #  - post_to_fb_group
+#  - post_to_twitter
 
 class PostAlertObserver < ActiveRecord::Observer
   observe :post, :post_action, :post_revision
@@ -93,6 +96,7 @@ class PostAlertObserver < ActiveRecord::Observer
         notify_post_users(post)
         if post.post_number == 1 && post.topic
           post_to_fb_group(post.topic)
+          post_to_twitter(post.topic)
         end
     end
   end
@@ -125,6 +129,17 @@ class PostAlertObserver < ActiveRecord::Observer
       @new_graph = Koala::Facebook::API.new(fb_bot_token)
       @new_graph.put_object('163895500288173', "feed", options)
     end
+  end
+
+  def post_to_twitter(topic)
+    permalink = "http://startupscene.it/t/" + topic.slug
+    status = topic.title.truncate(140 - permalink.length - 1, separator: ' ')
+    status += ' ' + permalink
+    
+    $twitter_client.update(status).inspect
+  rescue => e
+    puts e
+    # nothing to do, just do not throw
   end
 
   protected

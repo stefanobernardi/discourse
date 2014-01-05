@@ -217,3 +217,6 @@ end
 gem 'capistrano', '2.15.5', require: nil
 gem 'rvm-capistrano'
 gem 'koala'
+
+# added to to support twitter auto publishing -- @mcollina
+gem 'twitter'
