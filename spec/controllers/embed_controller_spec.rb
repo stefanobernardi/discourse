@@ -7,7 +7,11 @@ describe EmbedController do
 
   it "is 404 without an embed_url" do
 <<<<<<< HEAD
+<<<<<<< HEAD
     get :best
+=======
+    get :comments
+>>>>>>> upstream/master
 =======
     get :comments
 >>>>>>> upstream/master
@@ -17,7 +21,11 @@ describe EmbedController do
   it "raises an error with a missing host" do
     SiteSetting.stubs(:embeddable_host).returns(nil)
 <<<<<<< HEAD
+<<<<<<< HEAD
     get :best, embed_url: embed_url
+=======
+    get :comments, embed_url: embed_url
+>>>>>>> upstream/master
 =======
     get :comments, embed_url: embed_url
 >>>>>>> upstream/master
@@ -31,7 +39,11 @@ describe EmbedController do
 
     it "raises an error with no referer" do
 <<<<<<< HEAD
+<<<<<<< HEAD
       get :best, embed_url: embed_url
+=======
+      get :comments, embed_url: embed_url
+>>>>>>> upstream/master
 =======
       get :comments, embed_url: embed_url
 >>>>>>> upstream/master
@@ -55,7 +67,11 @@ describe EmbedController do
         TopicRetriever.expects(:new).returns(retriever)
         retriever.expects(:retrieve)
 <<<<<<< HEAD
+<<<<<<< HEAD
         get :best, embed_url: embed_url
+=======
+        get :comments, embed_url: embed_url
+>>>>>>> upstream/master
 =======
         get :comments, embed_url: embed_url
 >>>>>>> upstream/master
@@ -64,8 +80,13 @@ describe EmbedController do
       it "creates a topic view when a topic_id is found" do
         TopicEmbed.expects(:topic_id_for_embed).returns(123)
 <<<<<<< HEAD
+<<<<<<< HEAD
         TopicView.expects(:new).with(123, nil, {best: 5})
         get :best, embed_url: embed_url
+=======
+        TopicView.expects(:new).with(123, nil, {limit: 100, exclude_first: true})
+        get :comments, embed_url: embed_url
+>>>>>>> upstream/master
 =======
         TopicView.expects(:new).with(123, nil, {limit: 100, exclude_first: true})
         get :comments, embed_url: embed_url

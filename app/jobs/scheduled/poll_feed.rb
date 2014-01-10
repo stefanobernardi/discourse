@@ -5,6 +5,10 @@ require 'digest/sha1'
 require_dependency 'post_creator'
 require_dependency 'post_revisor'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+require 'open-uri'
+>>>>>>> upstream/master
 =======
 require 'open-uri'
 >>>>>>> upstream/master
@@ -29,6 +33,7 @@ module Jobs
       return if user.blank?
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       fetch_opts = {}
 
       last_modified = $redis.get(feed_key)
@@ -51,6 +56,8 @@ module Jobs
 
         false
 =======
+=======
+>>>>>>> upstream/master
       require 'simple-rss'
       rss = SimpleRSS.parse open(SiteSetting.feed_polling_url)
 
@@ -62,6 +69,9 @@ module Jobs
         if content
           TopicEmbed.import(user, url, i.title, CGI.unescapeHTML(content.scrub))
         end
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
 >>>>>>> upstream/master
       end
     end

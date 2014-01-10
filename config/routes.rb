@@ -243,7 +243,11 @@ Discourse::Application.routes.draw do
   get "topics/private-messages-unread/:username" => "list#private_messages_unread", as: "topics_private_messages_unread", constraints: {username: USERNAME_ROUTE_FORMAT}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   get 'embed/best' => 'embed#best'
+=======
+  get 'embed/comments' => 'embed#comments'
+>>>>>>> upstream/master
 =======
   get 'embed/comments' => 'embed#comments'
 >>>>>>> upstream/master

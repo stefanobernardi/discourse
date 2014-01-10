@@ -47,7 +47,11 @@ module("Discourse.KeyboardShortcuts", {
       "  </td></tr>",
       "</table>",
       "<div id='topic-footer-buttons'>",
+<<<<<<< HEAD
       "  <button class='favorite'></button>",
+=======
+      "  <button class='star'></button>",
+>>>>>>> upstream/master
       "  <button class='create'></button>",
       "  <button class='share'></button>",
       "</div>",

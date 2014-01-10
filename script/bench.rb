@@ -172,7 +172,11 @@ begin
   ]
 
   tests += tests.map{|k,url| ["#{k}_admin", "#{url}#{append}"]}
+<<<<<<< HEAD
   tests.shuffle
+=======
+  tests.shuffle!
+>>>>>>> upstream/master
 
   def best_of(a, b)
     return a unless b
@@ -204,7 +208,11 @@ begin
 
   rss = `ps -o rss -p #{pid}`.chomp.split("\n").last.to_i
 
+<<<<<<< HEAD
   results.merge({
+=======
+  results = results.merge({
+>>>>>>> upstream/master
     "timings" => @timings,
     "ruby-version" => "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}",
     "rss_kb" => rss

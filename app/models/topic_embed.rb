@@ -47,7 +47,11 @@ class TopicEmbed < ActiveRecord::Base
     opts = opts || {}
     doc = Readability::Document.new(open(url).read,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         tags: %w[div p code pre h1 h2 h3 b em i strong a img],
+=======
+                                        tags: %w[div p code pre h1 h2 h3 b em i strong a img ul li ol],
+>>>>>>> upstream/master
 =======
                                         tags: %w[div p code pre h1 h2 h3 b em i strong a img ul li ol],
 >>>>>>> upstream/master

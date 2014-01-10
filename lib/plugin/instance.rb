@@ -158,7 +158,11 @@ class Plugin::Instance
         elsif asset =~ /\.css$|\.scss$/
           DiscoursePluginRegistry.stylesheets << asset
 <<<<<<< HEAD
+<<<<<<< HEAD
         elsif asset =~ /\.js\.handlebars$$/
+=======
+        elsif asset =~ /\.js\.handlebars$/
+>>>>>>> upstream/master
 =======
         elsif asset =~ /\.js\.handlebars$/
 >>>>>>> upstream/master

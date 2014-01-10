@@ -325,7 +325,7 @@ Discourse.TopicController = Discourse.ObjectController.extend(Discourse.Selected
     return false;
   },
 
-  showFavoriteButton: function() {
+  showStarButton: function() {
     return Discourse.User.current() && !this.get('isPrivateMessage');
   }.property('isPrivateMessage'),
 
@@ -523,6 +523,8 @@ Discourse.TopicController = Discourse.ObjectController.extend(Discourse.Selected
         firstLoadedPost = postStream.get('firstLoadedPost');
 
     this.set('currentPost', post.get('post_number'));
+
+    if (post.get('post_number') === 1) { return; }
 
     if (firstLoadedPost && firstLoadedPost === post) {
       // Note: jQuery shouldn't be done in a controller, but how else can we

@@ -11,11 +11,7 @@ Discourse.KeyboardShortcuts = Ember.Object.createWithMixins({
     'g l': '/latest',
     'g n': '/new',
     'g u': '/unread',
-<<<<<<< HEAD
-    'g f': '/favorited',
-=======
     'g f': '/starred',
->>>>>>> upstream/master
     'g c': '/categories',
     'g t': '/top'
   },
@@ -26,13 +22,8 @@ Discourse.KeyboardShortcuts = Ember.Object.createWithMixins({
     'd': 'article.selected button.delete',                        // delete selected post
     'e': 'article.selected button.edit',                          // edit selected post
 
-<<<<<<< HEAD
-    // favorite topic
-    'f': '#topic-footer-buttons button.favorite, #topic-list tr.topic-list-item.selected a.star',
-=======
     // star topic
     'f': '#topic-footer-buttons button.star, #topic-list tr.topic-list-item.selected a.star',
->>>>>>> upstream/master
 
     'l': 'article.selected button.like',                          // like selected post
     'm m': 'div.notification-options li[data-id="0"] a',          // mark topic as muted
