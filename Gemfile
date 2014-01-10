@@ -65,7 +65,7 @@ else
   gem 'active_attr'
 end
 
-gem 'redis-rails'
+#gem 'redis-rails'
 gem 'hiredis'
 gem 'redis', :require => ["redis", "redis/connection/hiredis"]
 
@@ -198,13 +198,17 @@ gem 'lru_redux'
 #  we are open to it. by deferring require to the initializer we can configure disourse installs without it
 
 gem 'flamegraph', require: false
-gem 'rack-mini-profiler',  '0.9.0.pre ', require: false
+gem 'rack-mini-profiler', require: false
 
 # used for caching, optional
 gem 'rack-cors', require: false
 gem 'unicorn', require: false
 gem 'puma', require: false
-gem 'rbtrace', require: false
+gem 'rbtrace', require: false, platform: :mri
+
+# required for feed importing and embedding
+gem 'ruby-readability', require: false
+gem 'simple-rss', require: false
 
 # perftools only works on 1.9 atm
 group :profile do

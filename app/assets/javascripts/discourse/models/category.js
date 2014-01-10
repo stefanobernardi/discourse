@@ -168,8 +168,11 @@ Discourse.Category = Discourse.Model.extend({
       if (stats.length === 2) return false;
     }, this);
     return stats;
-  }
+  },
 
+  isUncategorizedCategory: function() {
+    return this.get('id') === Discourse.Site.currentProp("uncategorized_category_id");
+  }.property('id')
 });
 
 Discourse.Category.reopenClass({
@@ -192,12 +195,23 @@ Discourse.Category.reopenClass({
   },
 
   list: function() {
-    return Discourse.Site.currentProp('categories');
+    return Discourse.Site.currentProp('sortedCategories');
   },
 
   findSingleBySlug: function(slug) {
     return Discourse.Category.list().find(function(c) {
       return Discourse.Category.slugFor(c) === slug;
+    });
+  },
+
+  // TODO: optimise, slow for no real reason
+  findById: function(id){
+    return Discourse.Category.list().findBy('id', id);
+  },
+
+  findByIds: function(ids){
+    return ids.map(function(id){
+      return Discourse.Category.findById(id);
     });
   },
 

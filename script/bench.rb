@@ -6,6 +6,7 @@ require "optparse"
 @include_env = false
 @result_file = nil
 @iterations = 500
+@best_of = 1
 opts = OptionParser.new do |o|
   o.banner = "Usage: ruby bench.rb [options]"
 
@@ -18,18 +19,26 @@ opts = OptionParser.new do |o|
   o.on("-i", "--iterations [ITERATIONS]", "Number of iterations to run the bench for") do |i|
     @iterations = i.to_i
   end
+  o.on("-b", "--best_of [NUM]", "Number of times to run the bench taking best as result") do |i|
+    @best_of = i.to_i
+  end
 end
 opts.parse!
 
-def run(command)
-  system(command, out: $stdout, err: :out)
+def run(command, opt = nil)
+  if opt == :quiet
+    system(command, out: "/dev/null", err: :out)
+  else
+    system(command, out: $stdout, err: :out)
+  end
 end
 
 begin
   require 'facter'
 rescue LoadError
   run "gem install facter"
-  require 'facter'
+  puts "please rerun script"
+  exit
 end
 
 @timings = {}
@@ -54,7 +63,7 @@ sudo apt-get install redis-server
 end
 
 puts "Running bundle"
-if !run("bundle")
+if !run("bundle", :quiet)
   puts "Quitting, some of the gems did not install"
   prereqs
   exit
@@ -62,7 +71,8 @@ end
 
 puts "Ensuring config is setup"
 
-unless %x{which ab > /dev/null 2>&1}
+%x{which ab > /dev/null 2>&1}
+unless $? == 0
   abort "Apache Bench is not installed. Try: apt-get install apache2-utils or brew install ab"
 end
 
@@ -149,16 +159,36 @@ begin
   end
 
   puts "Starting benchmark..."
-
-  # asset precompilation is a dog, wget to force it
-  run "wget http://127.0.0.1:#{@port}/ -o tmp/test.html"
-  home_page = bench("/")
-  topic_page = bench("/t/oh-how-i-wish-i-could-shut-up-like-a-tunnel-for-so/69")
-
   append = "?api_key=#{api_key}&api_username=admin1"
 
-  home_page_admin = bench("/#{append}")
-  topic_page_admin = bench("/t/oh-how-i-wish-i-could-shut-up-like-a-tunnel-for-so/69#{append}")
+  # asset precompilation is a dog, wget to force it
+  run "wget http://127.0.0.1:#{@port}/ -o /dev/null"
+
+  tests = [
+    ["home", "/"],
+    ["topic", "/t/oh-how-i-wish-i-could-shut-up-like-a-tunnel-for-so/69"],
+    # ["user", "/users/admin1/activity"],
+    ["categories", "/categories"]
+  ]
+
+  tests += tests.map{|k,url| ["#{k}_admin", "#{url}#{append}"]}
+  tests.shuffle
+
+  def best_of(a, b)
+    return a unless b
+    return b unless a
+
+    a[50] < b[50] ? a : b
+  end
+
+
+  results = {}
+  @best_of.times do
+    tests.each do |name, url|
+      results[name] = best_of(bench(url),results[name])
+    end
+  end
+
 
   puts "Your Results: (note for timings- percentile is first, duration is second in millisecs)"
 
@@ -172,16 +202,15 @@ begin
 
   run("RAILS_ENV=profile bundle exec rake assets:clean")
 
-  results = {
-    "home_page" => home_page,
-    "topic_page" => topic_page,
-    "home_page_admin" => home_page_admin,
-    "topic_page_admin" => topic_page_admin,
-    "timings" => @timings,
-    "ruby-version" => "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
-  }.merge(facts).to_yaml
+  rss = `ps -o rss -p #{pid}`.chomp.split("\n").last.to_i
 
-  puts results
+  results.merge({
+    "timings" => @timings,
+    "ruby-version" => "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}",
+    "rss_kb" => rss
+  }).merge(facts)
+
+  puts results.to_yaml
 
   if @result_file
     File.open(@result_file,"wb") do |f|

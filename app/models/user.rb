@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
   before_save :ensure_password_is_hashed
   after_initialize :add_trust_level
   after_initialize :set_default_email_digest
+  after_initialize :set_default_external_links_in_new_tab
 
   after_save :update_tracked_topics
 
@@ -329,7 +330,7 @@ class User < ActiveRecord::Base
   def uploaded_avatar_path
     return unless SiteSetting.allow_uploaded_avatars? && use_uploaded_avatar
     avatar_template = uploaded_avatar_template.present? ? uploaded_avatar_template : uploaded_avatar.try(:url)
-    schemaless avatar_template
+    schemaless absolute avatar_template
   end
 
   def avatar_template
@@ -359,6 +360,10 @@ class User < ActiveRecord::Base
   end
 
   def posted_too_much_in_topic?(topic_id)
+
+    # Does not apply to staff or your own topics
+    return false if staff? || Topic.where(id: topic_id, user_id: id).exists?
+
     trust_level == TrustLevel.levels[:newuser] && (Post.where(topic_id: topic_id, user_id: id).count >= SiteSetting.newuser_max_replies_per_topic)
   end
 
@@ -594,6 +599,12 @@ class User < ActiveRecord::Base
         self.email_digests = true
         self.digest_after_days ||= SiteSetting.default_digest_email_frequency.to_i if has_attribute?(:digest_after_days)
       end
+    end
+  end
+
+  def set_default_external_links_in_new_tab
+    if has_attribute?(:external_links_in_new_tab) && self.external_links_in_new_tab.nil?
+      self.external_links_in_new_tab = !SiteSetting.default_external_links_in_new_tab.blank?
     end
   end
 

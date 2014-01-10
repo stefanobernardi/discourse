@@ -30,9 +30,6 @@ basic:
   ga_domain_name:
     client: true
     default: ''
-  enable_wide_category_list:
-    client: true
-    default: true
   category_featured_topics:
     client: true
     default: 3
@@ -124,8 +121,9 @@ users:
     default: 30
   delete_user_max_age:
     client: true
-    default: 14
+    default: 60
   delete_all_posts_max: 15
+  default_external_links_in_new_tab: false
 
 posting:
   min_post_length:
@@ -166,6 +164,7 @@ posting:
     default: 15
   enable_private_messages: true
   ninja_edit_window: 300
+  post_edit_time_limit: 525600
   edit_history_visible_to_public:
     client: true
     default: true
@@ -294,7 +293,7 @@ trust:
 
 security:
   enable_flash_video_onebox: false
-  use_ssl: false
+  use_https: false
   enable_escaped_fragments:
     client: true
     default: false
@@ -349,6 +348,13 @@ developer:
     default:
       test: false
       default: true
+
+embedding:
+  embeddable_host: ''
+  feed_polling_enabled: false
+  feed_polling_url: ''
+  embed_by_username: ''
+  embed_post_limit: 100
 
 uncategorized:
   tos_url:
@@ -412,5 +418,8 @@ uncategorized:
   minimum_topics_similar: 50
   sequential_replies_threshold: 2
   dominating_topic_minimum_percent: 20
+  suppress_uncategorized_badge:
+    client: true
+    default: true
 
 

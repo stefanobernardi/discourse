@@ -4,6 +4,10 @@
 require 'digest/sha1'
 require_dependency 'post_creator'
 require_dependency 'post_revisor'
+<<<<<<< HEAD
+=======
+require 'open-uri'
+>>>>>>> upstream/master
 
 module Jobs
   class PollFeed < Jobs::Scheduled
@@ -24,6 +28,7 @@ module Jobs
       user = User.where(username_lower: SiteSetting.embed_by_username.downcase).first
       return if user.blank?
 
+<<<<<<< HEAD
       fetch_opts = {}
 
       last_modified = $redis.get(feed_key)
@@ -45,6 +50,19 @@ module Jobs
         $redis.set(feed_key, feed.last_modified)
 
         false
+=======
+      require 'simple-rss'
+      rss = SimpleRSS.parse open(SiteSetting.feed_polling_url)
+
+      rss.items.each do |i|
+        url = i.link
+        url = i.id if url.blank? || url !~ /^https?\:\/\//
+
+        content = i.content || i.description
+        if content
+          TopicEmbed.import(user, url, i.title, CGI.unescapeHTML(content.scrub))
+        end
+>>>>>>> upstream/master
       end
     end
 

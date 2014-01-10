@@ -218,6 +218,13 @@ class Post < ActiveRecord::Base
     (quote_count == 0) && (reply_to_post_number.present?)
   end
 
+  def reply_to_post
+    return if reply_to_post_number.blank?
+    @reply_to_post ||= Post.where("topic_id = :topic_id AND post_number = :post_number",
+                                  topic_id: topic_id,
+                                  post_number: reply_to_post_number).first
+  end
+
   def reply_notification_target
     return if reply_to_post_number.blank?
     Post.where("topic_id = :topic_id AND post_number = :post_number AND user_id <> :user_id",
@@ -403,6 +410,14 @@ class Post < ActiveRecord::Base
     post_revision.modifications.each do |attribute, change|
       attribute = "version" if attribute == "cached_version"
       write_attribute(attribute, change[0])
+    end
+  end
+
+  def edit_time_limit_expired?
+    if created_at && SiteSetting.post_edit_time_limit.to_i > 0
+      created_at < SiteSetting.post_edit_time_limit.to_i.minutes.ago
+    else
+      false
     end
   end
 

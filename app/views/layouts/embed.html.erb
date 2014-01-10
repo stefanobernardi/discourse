@@ -5,12 +5,47 @@
 
     <script>
       (function() {
+<<<<<<< HEAD
         window.onload = function() {
           if (parent) {
             // Send a post message with our loaded height
             parent.postMessage({type: 'discourse-resize', height: document['body'].offsetHeight}, '<%= request.referer %>');
           }
         }
+=======
+
+        function postUp(msg) {
+          if (parent) {
+            parent.postMessage(msg, '<%= request.referer %>');
+          }
+        }
+
+        function clickPostLink(e) {
+          var postId = e.target.getAttribute('data-link-to-post');
+          if (postId) {
+            var postElement = document.getElementById('post-' + postId);
+            if (postElement) {
+              var rect = postElement.getBoundingClientRect();
+              if (rect && rect.top) {
+                postUp({type: 'discourse-scroll', top: rect.top});
+                e.preventDefault();
+                return false;
+              }
+            }
+          }
+        }
+
+        window.onload = function() {
+          // Send a post message with our loaded height
+          postUp({type: 'discourse-resize', height: document['body'].offsetHeight});
+
+          var postLinks = document.querySelectorAll("a[data-link-to-post]");
+          for (var i=0; i<postLinks.length; i++) {
+            postLinks[i].onclick = clickPostLink;
+          }
+        };
+
+>>>>>>> upstream/master
       })();
     </script>
   </head>
