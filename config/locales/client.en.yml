@@ -1500,11 +1500,7 @@ en:
         latest: '<b>g</b> then <b>l</b> Latest'
         new: '<b>g</b> then <b>n</b> New'
         unread: '<b>g</b> then <b>u</b> Unread'
-<<<<<<< HEAD
-        favorited: '<b>g</b> then <b>f</b> Favorited'
-=======
         starred: '<b>g</b> then <b>f</b> Starred'
->>>>>>> upstream/master
         categories: '<b>g</b> then <b>c</b> Categories'
       navigation:
         title: 'Navigation'
@@ -1520,11 +1516,7 @@ en:
         help: '<b>?</b> Open keyboard shortcuts help'
       actions:
         title: 'Actions'
-<<<<<<< HEAD
-        favorite: '<b>f</b> Favorite topic'
-=======
         star: '<b>f</b> Star topic'
->>>>>>> upstream/master
         share_topic: '<b>s</b> Share topic'
         share_post: '<b>shift s</b> Share post'
         reply_topic: '<b>r</b> Reply to topic'

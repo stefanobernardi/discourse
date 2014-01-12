@@ -403,11 +403,7 @@ da:
       title: "Bogmærker"
       xaxis: "Dag"
       yaxis: "Antal nye bogmærker"
-<<<<<<< HEAD
-    favorites:
-=======
     starred:
->>>>>>> upstream/master
       title: "Favoritter"
       xaxis: "Dag"
       yaxis: "Antal nye favoritter"
@@ -603,11 +599,7 @@ da:
     ga_domain_name: "Google analytics domænenavn, f.eks.: example.com; se http://google.com/analytics."
     enable_escaped_fragments: "Aktivér workaround som kan hjælpe ældre webcrawlers med at indeksere sitet. ADVARSEL: aktivér kun hvis du har behov for det."
     enable_noscript_support: "Aktivér standard webcrawler søgemaskineunderstøttelse vha. noscript-tagget"
-<<<<<<< HEAD
-    top_menu: "Angiv hvilke elementer der skal vises i hjemmesidenavigationen, og i hvilken rækkefølge. Eksempel: latest|hot|read|favorited|unread|new|posted|categories."
-=======
     top_menu: "Angiv hvilke elementer der skal vises i hjemmesidenavigationen, og i hvilken rækkefølge. Eksempel: latest|hot|read|starred|unread|new|posted|categories."
->>>>>>> upstream/master
     post_menu: "Angiv hvilke elementer der skal vises i indlægsmenuen, og i hvilken rækkefølge. Eksempel: like|edit|flag|delete|share|bookmark|reply."
     share_links: "Angiv hvilke elementer der skal vises i “del“-dialogboksen og i hvilken rækkefølge. Eksempel twitter|facebook|google+|email."
     track_external_right_clicks: "Spor højreklik på eksterne links (f.eks.: åbn i ny tab); deaktiveret som standard fordi den omskriver URLer"
@@ -674,11 +666,7 @@ da:
     max_flags_per_day: "Maksimalt antal flag per bruger per dag."
     max_bookmarks_per_day: "Maksimalt antal bogmærker per bruger per dag."
     max_edits_per_day: "Maksimalt antal ændringer per bruger per dag."
-<<<<<<< HEAD
-    max_favorites_per_day: "Maksimalt antal emner der kan vælges som favoritter per bruger per dag."
-=======
     max_stars_per_day: "Maksimalt antal emner der kan vælges som favoritter per bruger per dag."
->>>>>>> upstream/master
     max_topics_per_day: "Maksimal antal emner som en bruger kan oprette per dag."
     max_private_messages_per_day: "Maksimalt antal private beskeder som brugerne kan oprette per dag."
 

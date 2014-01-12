@@ -1082,11 +1082,7 @@ da:
       hot:
         title: "Populære"
         help: "de mest populære emner"
-<<<<<<< HEAD
-      favorited:
-=======
       starred:
->>>>>>> upstream/master
         title: "Favoritter"
         help: "emner du har markeret som favoritter"
       read:
@@ -1500,11 +1496,7 @@ da:
         latest: '<b>g</b> så <b>l</b> Seneste'
         new: '<b>g</b> så <b>n</b> Ny'
         unread: '<b>g</b> så <b>u</b> Ulæste'
-<<<<<<< HEAD
-        favorited: '<b>g</b> så <b>f</b> Favoritter'
-=======
         starred: '<b>g</b> så <b>f</b> Favoritter'
->>>>>>> upstream/master
         categories: '<b>g</b> så <b>c</b> Kategorier'
       navigation:
         title: 'Navigation'
@@ -1520,11 +1512,7 @@ da:
         help: '<b>?</b> Åbn hjælp til tastaturgenveje'
       actions:
         title: 'Handlinger'
-<<<<<<< HEAD
-        favorite: '<b>f</b> Markér emne som favorit'
-=======
         star: '<b>f</b> Markér emne som favorit'
->>>>>>> upstream/master
         share_topic: '<b>s</b> Del emne'
         share_post: '<b>shift s</b> Del indlæg'
         reply_topic: '<b>r</b> Svar på emne'

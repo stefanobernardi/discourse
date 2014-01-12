@@ -45,17 +45,6 @@ en:
     replies:
       one: "1 reply"
       other: "%{count} replies"
-<<<<<<< HEAD
-
-  embed:
-    title: "Discussion Highlights"
-    start_discussion: "Begin the Discussion"
-    continue: "Continue the Discussion"
-    loading: "Loading Discussion..."
-    permalink: "Permalink"
-    imported_from: "Imported from: %{link}"
-=======
->>>>>>> upstream/master
 
   too_many_mentions:
     zero: "Sorry, you can't mention other users."
@@ -795,14 +784,7 @@ en:
     feed_polling_enabled: "Whether to import a RSS/ATOM feed as posts"
     feed_polling_url: "URL of RSS/ATOM feed to import"
     embed_by_username: "Discourse username of the user who creates the topics"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     embed_post_limit: "Maximum number of posts to embed"
->>>>>>> upstream/master
-=======
-    embed_post_limit: "Maximum number of posts to embed"
->>>>>>> upstream/master
 
   notification_types:
     mentioned: "%{display_username} mentioned you in %{link}"
@@ -965,11 +947,7 @@ en:
 
       **New version: %{new_version}**
 
-<<<<<<< HEAD
-      Please upgrade as soon as possible to get the latest fixes and new features.
-=======
       Please upgrade as soon as possible to get the latest fixes and new features. Visit http://meta.discourse.org for discussion and news about Discourse.
->>>>>>> upstream/master
 
   new_version_mailer_with_notes:
     subject_template: "[%{site_name}] Updates Are Available"
@@ -981,11 +959,8 @@ en:
       **New version: %{new_version}**
 
       %{notes}
-<<<<<<< HEAD
-=======
 
       Visit http://meta.discourse.org for discussion and news about Discourse.
->>>>>>> upstream/master
 
   system_messages:
     post_hidden:
