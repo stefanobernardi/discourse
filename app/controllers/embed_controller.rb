@@ -5,35 +5,17 @@ class EmbedController < ApplicationController
 
   layout 'embed'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  def best
-=======
   def comments
->>>>>>> upstream/master
-=======
-  def comments
->>>>>>> upstream/master
     embed_url = params.require(:embed_url)
     topic_id = TopicEmbed.topic_id_for_embed(embed_url)
 
     if topic_id
-<<<<<<< HEAD
-<<<<<<< HEAD
-      @topic_view = TopicView.new(topic_id, current_user, {best: 5})
-=======
-=======
->>>>>>> upstream/master
       @topic_view = TopicView.new(topic_id, current_user, limit: SiteSetting.embed_post_limit, exclude_first: true)
       @second_post_url = "#{@topic_view.topic.url}/2" if @topic_view
       @posts_left = 0
       if @topic_view && @topic_view.posts.size == SiteSetting.embed_post_limit
         @posts_left = @topic_view.topic.posts_count - SiteSetting.embed_post_limit
       end
-<<<<<<< HEAD
->>>>>>> upstream/master
-=======
->>>>>>> upstream/master
     else
       Jobs.enqueue(:retrieve_topic, user_id: current_user.try(:id), embed_url: embed_url)
       render 'loading'
@@ -45,22 +27,11 @@ class EmbedController < ApplicationController
   private
 
     def ensure_embeddable
-<<<<<<< HEAD
-<<<<<<< HEAD
-      raise Discourse::InvalidAccess.new('embeddable host not set') if SiteSetting.embeddable_host.blank?
-      raise Discourse::InvalidAccess.new('invalid referer host') if URI(request.referer || '').host != SiteSetting.embeddable_host
-=======
-=======
->>>>>>> upstream/master
 
       if !(Rails.env.development? && current_user.try(:admin?))
         raise Discourse::InvalidAccess.new('embeddable host not set') if SiteSetting.embeddable_host.blank?
         raise Discourse::InvalidAccess.new('invalid referer host') if URI(request.referer || '').host != SiteSetting.embeddable_host
       end
-<<<<<<< HEAD
->>>>>>> upstream/master
-=======
->>>>>>> upstream/master
 
       response.headers['X-Frame-Options'] = "ALLOWALL"
     rescue URI::InvalidURIError

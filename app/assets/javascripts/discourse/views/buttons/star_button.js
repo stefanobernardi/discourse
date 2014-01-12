@@ -6,17 +6,10 @@
   @namespace Discourse
   @module Discourse
 **/
-<<<<<<< HEAD:app/assets/javascripts/discourse/views/buttons/favorite_button.js
-Discourse.FavoriteButton = Discourse.ButtonView.extend({
-  classNames: ['favorite'],
-  textKey: 'favorite.title',
-  helpKeyBinding: 'controller.favoriteTooltipKey',
-=======
 Discourse.StarButton = Discourse.ButtonView.extend({
   classNames: ['star'],
   textKey: 'starred.title',
   helpKeyBinding: 'controller.starTooltipKey',
->>>>>>> upstream/master:app/assets/javascripts/discourse/views/buttons/star_button.js
   attributeBindings: ['disabled'],
 
   shouldRerender: Discourse.View.renderIfChanged('controller.starred'),
@@ -31,4 +24,3 @@ Discourse.StarButton = Discourse.ButtonView.extend({
                  "'></i>");
   }
 });
-
