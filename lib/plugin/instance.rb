@@ -157,15 +157,7 @@ class Plugin::Instance
           DiscoursePluginRegistry.javascripts << asset
         elsif asset =~ /\.css$|\.scss$/
           DiscoursePluginRegistry.stylesheets << asset
-<<<<<<< HEAD
-<<<<<<< HEAD
-        elsif asset =~ /\.js\.handlebars$$/
-=======
         elsif asset =~ /\.js\.handlebars$/
->>>>>>> upstream/master
-=======
-        elsif asset =~ /\.js\.handlebars$/
->>>>>>> upstream/master
           DiscoursePluginRegistry.handlebars << asset
         end
       end
